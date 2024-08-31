@@ -1,5 +1,10 @@
 package main
 
+// Convert from YAML to JSON
+
+// Copyright (C) Philip Schlump, 2023.
+// MIT Licensed.
+
 import (
 	"encoding/json"
 	"flag"

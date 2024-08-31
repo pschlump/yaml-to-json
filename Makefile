@@ -1,4 +1,6 @@
 
+# `make test` to test.
+
 all:
 	go buld
 
