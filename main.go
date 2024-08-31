@@ -28,6 +28,7 @@ func convert(i interface{}) interface{} {
 
 var in = flag.String("input", "", "Input yaml file to convert")
 var out = flag.String("output", "", "Output json file to convert")
+var indent = flag.Bool("no-indent", false, "Output JSON with indentation")
 
 func main() {
 
@@ -57,23 +58,30 @@ func main() {
 
 	body = convert(body)
 
-	if *out == "" {
-		fmt.Printf("%s\n", UnmarshalIndentJSON(body))
-	} else {
-		ioutil.WriteFile(*out, []byte(UnmarshalIndentJSON(body)), 0644)
+	fx := UnmarshalIndentJSON
+	if *indent {
+		fx = UnmarshalJSON
 	}
 
-	//	if b, err := json.Marshal(body); err != nil {
-	//		panic(err)
-	//	} else {
-	//		fmt.Printf("Output: %s\n", b)
-	//	}
+	if *out == "" {
+		fmt.Printf("%s\n", fx(body))
+	} else {
+		ioutil.WriteFile(*out, []byte(fx(body)), 0644)
+	}
 
 }
 
 func UnmarshalIndentJSON(v interface{}) string {
-	// s, err := json.Marshal ( v )
-	s, err := json.MarshalIndent(v, "", "\t")
+	s, err := json.MarshalIndent(v, "", "    ")
+	if err != nil {
+		return fmt.Sprintf("Error:%s", err)
+	} else {
+		return string(s)
+	}
+}
+
+func UnmarshalJSON(v interface{}) string {
+	s, err := json.Marshal(v)
 	if err != nil {
 		return fmt.Sprintf("Error:%s", err)
 	} else {
