@@ -11,9 +11,9 @@ $ yaml-to-json --input aaa.yaml --output aaa.json
 
 | Argument       | Description                                                    |
 |----------------|----------------------------------------------------------------|
-| --input <fn>   | Required input file name.                                      |
-| --ouptut <fn>  | optional, output file name.                                    |
-| --no-indent    | Turn off indent of output JSON.                                |
+| --input <fn>   | Required: input file name.                                     |
+| --ouptut <fn>  | Optional: output file name.                                    |
+| --no-indent    | Optional: Turn off indent of output JSON.                      |
 
 
 ## License: MIT
