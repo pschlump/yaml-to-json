@@ -1,0 +1,35 @@
+openapi: "3.0.0"
+info:
+  title: Minimal ping API server
+  description: DemoApp10 Is a demo of Using geneate OpenAPI 3.0
+  version: 1.0.0
+paths:
+  /ping:
+    get:
+      responses:
+        '200':
+          description: pet response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pong'
+  /echo:
+    get:
+      responses:
+        '200':
+          description: echo back call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pong'
+components:
+  schemas:
+    # base types
+    Pong:
+      type: object
+      required:
+        - ping
+      properties:
+        ping:
+          type: string
+          example: pong
